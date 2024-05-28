@@ -3,7 +3,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Reflection.Metadata.Ecma335;
 using System.Collections.Generic;
-//using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using System.Xml.Linq;
 
 namespace PoeProject.Models
@@ -22,9 +21,9 @@ namespace PoeProject.Models
 
         public string userName { get; set; }
 
-        public string password { get; set; }
+        public string userPassword { get; set; }
 
-        public string email { get; set; }
+        public string userEmail { get; set; }
 
 
 
@@ -34,24 +33,32 @@ namespace PoeProject.Models
         {
             string connectionString = GetAzureConnectionString();
 
-            //string sql = "INSERT INTO dbo.userTable (userName, userEmail, userPassword) VALUES (@UserName, @Email, @Password)";
-            string sql = "INSERT INTO dbo.productTable (name, price, category, availability) VALUES ('Test Product', 10.99, 'Category 1', 1);";
+            string sql = "INSERT INTO dbo.userTable (userName, userEmail, userPassword) VALUES (@UserName, @Email, @Password)";
+            //string sql = "INSERT INTO dbo.productTable (name, price, category, availability) VALUES ('Test Product', 10.99, 'Category 1', 1);";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand(sql, con);
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(sql, con);
 
-                cmd.Parameters.AddWithValue("@userName", m.userName);
-                cmd.Parameters.AddWithValue("@password", m.password);
-                cmd.Parameters.AddWithValue("@email", m.email);
+                    cmd.Parameters.AddWithValue("@UserName", m.userName);
+                    cmd.Parameters.AddWithValue("@Password", m.userPassword);
+                    cmd.Parameters.AddWithValue("@Email", m.userEmail);
 
-                con.Open();
+                    con.Open();
 
-                int rowsAffected = cmd.ExecuteNonQuery();
+                    int rowsAffected = cmd.ExecuteNonQuery();
 
-                con.Close();
+                    con.Close();
 
-                return rowsAffected;
+                    return rowsAffected;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
+
             /*
             try
             {

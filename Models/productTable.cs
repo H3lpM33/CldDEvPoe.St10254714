@@ -33,14 +33,14 @@ namespace PoeProject.Models
 
             try
             {
-                string sql = "INSERT INTO productTable (name, price, category, avaliability) VALUES (@Name, @Price, @Category, @Availability);";
+                string sql = "INSERT INTO productTable (name, price, category, avaliability) VALUES (@Name, @Price, @Category, @Avaliability);";
                     
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("@Name", p.name);
                 cmd.Parameters.AddWithValue("@Price", p.price);
                 cmd.Parameters.AddWithValue("@Category", p.category);
-                cmd.Parameters.AddWithValue("@Availability", p.avaliability);
+                cmd.Parameters.AddWithValue("@Avaliability", p.avaliability);
 
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -65,7 +65,7 @@ namespace PoeProject.Models
             int rowsAffected = cmd.ExecuteNonQuery();
             con.Close();
             return rowsAffected; 
-        }
+        }i
             catch (Exception ex)
             {
                 
