@@ -33,7 +33,7 @@ namespace PoeProject.Models
         {
             string connectionString = GetAzureConnectionString();
 
-            string sql = "INSERT INTO dbo.userTable (userName, userEmail, userPassword) VALUES (@UserName, @Email, @Password)";
+            string sql = "INSERT INTO userTable (userName, userEmail, userPassword) VALUES (@UserName, @Email, @Password)";
             //string sql = "INSERT INTO dbo.productTable (name, price, category, availability) VALUES ('Test Product', 10.99, 'Category 1', 1);";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
