@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
 using PoeProject.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Data.SqlClient;
 
 namespace PoeProject.Controllers
 {
@@ -8,12 +9,27 @@ namespace PoeProject.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        public IActionResult TestDatabaseConnection()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(productTable.con_string))
+                {
+                    connection.Open();
+                    return Content("Database connection successful!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content("Database connection failed: " + ex.Message);
+            }
+        }
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int userId)
         {
             return View();
         }
@@ -30,6 +46,14 @@ namespace PoeProject.Controllers
         {
             return View();
         }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult CreateAccount()
+        {
+            return View();
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -37,5 +61,7 @@ namespace PoeProject.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+       
+
     }
 }

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.EntityFrameworkCore.Storage
+@model PoeProject.Models.productTable
+@{
     ViewData["Title"] = "My Work";
 }
 <h1>My Work:</h1>
@@ -16,19 +18,88 @@
     .white-square {
         position: absolute;
         background-color: #FFFFFF;
-        width: 50px; /* Adjust the width as needed */
-        height: 50px; /* Adjust the height as needed */
-        padding: 20px; /* Optional: Adds some space inside the square */
-        z-index: -1; /* Ensures the square stays behind the content */
+        width: 50px; 
+        height: 50px; 
+        padding: 20px; 
+        z-index: -1; 
     }
 
  
     <div class="white-square" > </div >
+  
 </style>
 <p>Khumalo Craft Emporium has a wide variety of handmade, artisan goods from local craftsman from all across the african landscape. Whether its from Morroco, Gambia, Somalia or Limpopo, we have what you are looking for. Please take a look below at some of the offerings we have available below and remember; every purchase made supports the local artisans and allows them to keep their traditions alive and support their families.</p>
 <br />
+<h2>Submit Your Own Work:</h2>
+<body>
+    <form action="MyWork" method="post">
+        <p>Insert new products</p>
+        <input type="text" name="Name" placeholder="Name" required>
+        <input type="text" name="Price" placeholder="Price" required>
+        <input type="text" name="Category" placeholder="Category" required>
+        <input type="text" name="Availability" placeholder="Availability" required>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+<br />
+<button id="testDatabaseConnection">Test Database Connection</button>
+<div id="connectionResult"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#testDatabaseConnection').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("TestDatabaseConnection", "Home")',
+                success: function (result) {
+                    $('#connectionResult').text(result);
+                },
+                error: function (xhr, status, error) {
+                    $('#connectionResult').text('An error occurred: ' + error);
+                }
+            });
+        });
+    });
+</script>
+
+@*<h2>Products</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.name</td>
+                    <td>@product.price</td>
+                    <td>@product.category</td>
+                    <td>@product.availability</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No products found.</p>
+}
+
+
+
+
+@*
 <img src="\images\_44872b86-88a7-4372-b307-00763958c852.jpeg" width=400 height=300 class="center-image">
-<p class="center-text">
+<p class="center-text"> 
     <b> Gambian Wooden Bowl </b>
 </p>
 <p class="center-text">
@@ -70,4 +141,5 @@
     Price: R800 <button type="button">Buy</button>
 
 </p>
+*@
    

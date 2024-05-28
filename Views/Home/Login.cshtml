@@ -1,0 +1,21 @@
+﻿@model PoeProject.Models.userTable
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Login";
+
+    <body>
+    <form asp-controller="Home" asp-action="Index" method="post">
+            <p>Please Login</p>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="password" placeholder="Password" required>
+            <input type="text" name="Email" placeholder="example@gmail.com" required>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+
+
+
+
+}
