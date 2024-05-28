@@ -12,7 +12,7 @@ namespace PoeProject.Models
     {
 
 
-        public static string con_string = "Server=tcp:clouddevone.database.windows.net,1433;Initial Catalog=ST10254714CldDev;Persist Security Info=False;User ID=Caleb;Password={Liverpoolfour100};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        public static string con_string = "Server=tcp:clouddevone.database.windows.net,1433;Initial Catalog=ST10254714CldDev;Persist Security Info=False;User ID=Caleb;Password=Liverpoolfour100;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         //public static string con_string = "Integrated Security=SSPI;Persist Security Info=False;User ID=\"\";Initial Catalog=test;Data Source=labVMH8OX\\SQLEXPRESS";
 
 
@@ -40,9 +40,9 @@ namespace PoeProject.Models
             {
                 SqlCommand cmd = new SqlCommand(sql, con);
 
-                cmd.Parameters.AddWithValue("@UserName", m.userName);
-                cmd.Parameters.AddWithValue("@Password", m.password);
-                cmd.Parameters.AddWithValue("@Email", m.email);
+                cmd.Parameters.AddWithValue("@userName", m.userName);
+                cmd.Parameters.AddWithValue("@password", m.password);
+                cmd.Parameters.AddWithValue("@email", m.email);
 
                 con.Open();
 

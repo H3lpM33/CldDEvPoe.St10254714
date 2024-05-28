@@ -6,7 +6,7 @@ namespace PoeProject.Models
 
     public class productTable
     {
-        public static string con_string = "Server=tcp:clouddevone.database.windows.net,1433;Initial Catalog=ST10254714CldDev;Persist Security Info=False;User ID=Caleb;Password={Liverpoolfour100};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        public static string con_string = "Server=tcp:clouddevone.database.windows.net,1433;Initial Catalog=ST10254714CldDev;Persist Security Info=False;User ID=Caleb;Password=Liverpoolfour100;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         //public static string con_string = "Integrated Security=SSPI;Persist Security Info=False;User ID=\"\";Initial Catalog=test;Data Source=labVMH8OX\\SQLEXPRESS";
 
         public static SqlConnection con = new SqlConnection(con_string);
@@ -17,30 +17,30 @@ namespace PoeProject.Models
 
         public string category { get; set; }
 
-        public string availability { get; set; }
+        public string avaliability { get; set; }
 
 
 
         public int insert_product(productTable p)
         {
+/*
+            DECLARE @Name NVARCHAR(MAX) = @pName;
+            DECLARE @Price DECIMAL(18, 2) = @pPrice;
+            DECLARE @Category NVARCHAR(MAX) = @pCategory;
+            DECLARE @Availability BIT = @pAvailability;*/
+
+
 
             try
             {
-                string sql = @"
-                 DECLARE @Name NVARCHAR(MAX) = @pName;
-                 DECLARE @Price DECIMAL(18,2) = @pPrice;
-                 DECLARE @Category NVARCHAR(MAX) = @pCategory;
-                 DECLARE @Availability BIT = @pAvailability;
-
-                    INSERT INTO dbo.productTable (name, price, category, availability)
-                    VALUES (@Name, @Price, @Category, @Availability);
-                    ";
+                string sql = "INSERT INTO productTable (name, price, category, avaliability) VALUES (@Name, @Price, @Category, @Availability);";
+                    
 
                 SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@pName", p.name);
-                cmd.Parameters.AddWithValue("@pPrice", p.price);
-                cmd.Parameters.AddWithValue("@pCategory", p.category);
-                cmd.Parameters.AddWithValue("@pAvailability", p.availability);
+                cmd.Parameters.AddWithValue("@Name", p.name);
+                cmd.Parameters.AddWithValue("@Price", p.price);
+                cmd.Parameters.AddWithValue("@Category", p.category);
+                cmd.Parameters.AddWithValue("@Availability", p.avaliability);
 
                 con.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -97,7 +97,7 @@ namespace PoeProject.Models
                                 name = reader.GetString(reader.GetOrdinal("Name")),
                                 price = reader.GetString(reader.GetOrdinal("Price")),
                                 category = reader.GetString(reader.GetOrdinal("Category")),
-                                availability = reader.GetString(reader.GetOrdinal("Availability"))
+                                avaliability = reader.GetString(reader.GetOrdinal("Availability"))
                             });
                         }
                     }

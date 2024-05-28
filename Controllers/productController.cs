@@ -11,7 +11,7 @@ namespace PoeProject.Controllers
         public IActionResult MyWork(productTable product)
         {
             var result2 = prodtbl.insert_product(product);
-            return RedirectToAction("MyWork", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
